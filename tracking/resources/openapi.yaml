@@ -1,0 +1,134 @@
+openapi: 3.0.0
+info:
+  description: >-
+    Leadville API definition that is used as a contract between Frontend and
+    backend
+  version: 1.0.2-oas3
+  title: Leadville API
+  contact:
+    email: mohamedveron23@gmail.com
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+paths:
+
+  /devices/:
+    post:   
+      summary: >-
+        Accepts pilot data to create account and register.
+      operationId: createPilot
+      description: Register new pilot.
+      requestBody:
+        description: RegisterPilotPost request data.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Device'
+      responses:
+        '201':
+          description: pilot created
+        '400':
+          description: 'invalid input, object invalid'
+        '409':
+          description: an existing item already exists
+          
+    put:   
+      summary: >-
+        Accepts pilot data to update the account and compelete all details.
+      operationId: UpdatePilot
+      description: Update pilot.
+      requestBody:
+        description: UpdatePilotPost request data.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Device'
+      responses:
+        '201':
+          description: pilot updated
+        '400':
+          description: 'invalid input, object invalid'
+        '409':
+          description: an existing item already exists      
+   
+                 
+  /devices/pending:        
+    get:
+      summary: >-
+        Accepts pilot .
+      operationId: getPilot
+      description: Get pilot .
+          
+      responses:
+        '200':
+          description: item returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeviceDetails'
+          
+        '400':
+          description: 'invalid input, object invalid'
+  
+  /devices/{id}:        
+    get:
+      summary: >-
+        Accepts pilot id.
+      operationId: getPilotById
+      description: Get specific pilot .
+      parameters:
+      - name: id
+        in: path
+        description: pass an pilot id to get his data
+        required: true
+        schema:
+          type: integer
+          format: int64    
+      responses:
+        '200':
+          description: item returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Device'
+          
+        '400':
+          description: 'invalid input, object invalid'                               
+      
+components:    
+  schemas:
+  
+    DeviceDetails: 
+      allOf:
+        - $ref: '#/components/schemas/Device'
+        - required:
+          - id
+          - imageUrl
+        - type: object  
+          properties:
+            id:
+              type: integer
+              format: int64 
+            imageUrl:
+              type: string
+            gender:
+              type: string
+  
+    Device: 
+      required:
+      - pilotPostId
+      type: object
+      properties:
+        pilotPostId:
+          type: integer
+          format: int64
+        frequentFlyer:
+          type: boolean
+          example: true
+        about:
+          type: string
+          example: about me
+        flyingDetails:
+          type: string
+          example: I've been flying for 5 years
+  
