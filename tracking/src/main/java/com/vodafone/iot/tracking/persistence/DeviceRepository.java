@@ -12,5 +12,7 @@ import com.vodafone.iot.tracking.model.Device;
 public interface DeviceRepository extends JpaRepository<Device, Long>{
 	
 	@Query("select d from Device d where d.simCard.status = 'waiting'")
-	public List<Device>	getpendingDevices();
+	public List<Device>	getPendingDevices();
+	@Query("select d from Device d where d.status = 'ready' and d.temperature between -25 and 80")
+	public List<Device>	getReadyDevices();
 }

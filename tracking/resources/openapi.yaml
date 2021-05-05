@@ -62,26 +62,27 @@ paths:
           description: device Configured
         '400':
           description: 'invalid input, object invalid'
-               
+    
+  /devices/{deviceId}/{status}:           
     put:   
       summary: >-
         Accepts device data to update the device configration status.
       operationId: UpdateDevice
       description: Update device.
       parameters:
-       - name: id
+       - name: deviceId
          in: path
          description: pass an device id to update sim card status
          required: true
          schema:
            type: integer
-           format: int64 
-      requestBody:
-        description: UpdateDevice request data.
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Device'
+           format: int64
+       - name: status
+         in: path
+         description: new configruation status
+         required: true
+         schema:
+           type: string     
       responses:
         '201':
           description: device updated

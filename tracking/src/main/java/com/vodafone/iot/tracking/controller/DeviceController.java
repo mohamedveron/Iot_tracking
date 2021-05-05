@@ -54,7 +54,7 @@ public class DeviceController implements DevicesApi{
 		List<DeviceDetails> response = new ArrayList<DeviceDetails>();
 		
 		try {
-			List<com.vodafone.iot.tracking.model.Device> devices = deviceService.getpendingDevices();
+			List<com.vodafone.iot.tracking.model.Device> devices = deviceService.getPendingDevices();
 			
 			for(com.vodafone.iot.tracking.model.Device d : devices) {
 				
@@ -77,5 +77,47 @@ public class DeviceController implements DevicesApi{
 		} catch (Exception e) {
 			return new ResponseEntity<List<DeviceDetails>>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
+    }
+	
+	@Override
+	public  ResponseEntity<List<DeviceDetails>> getReadyDevices() {
+        
+		List<DeviceDetails> response = new ArrayList<DeviceDetails>();
+		
+		try {
+			List<com.vodafone.iot.tracking.model.Device> devices = deviceService.getReadyForSaleDevices();
+			
+			for(com.vodafone.iot.tracking.model.Device d : devices) {
+				
+				SIMCard card = SIMCard.builder()
+						.operatorCode(d.getSimCard().getCode())
+						.status(d.getSimCard().getStatus())
+						.country(d.getSimCard().getCountry())
+						.build();
+				
+				DeviceDetails device = DeviceDetails.builder()
+						.id(d.getId())
+						.temperature(d.getTemperature())
+						.status(d.getStatus())
+						.siMCard(card)
+						.build();
+				
+				response.add(device);
+			}
+			return new ResponseEntity<List<DeviceDetails>>(response, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<List<DeviceDetails>>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+    }
+	
+	@Override
+	public  ResponseEntity<Void> updateDevice(Long deviceId, String status) {
+		try {
+			deviceService.changeDeviceStatus(deviceId, status);
+			return new ResponseEntity<>(HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
     }
 }

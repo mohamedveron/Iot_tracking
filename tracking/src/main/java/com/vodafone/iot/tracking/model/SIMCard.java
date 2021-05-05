@@ -14,6 +14,7 @@ public class SIMCard {
 	
 	@Id
 	@GeneratedValue
+	@Getter
 	private Long id;
 	@Getter
 	@Setter

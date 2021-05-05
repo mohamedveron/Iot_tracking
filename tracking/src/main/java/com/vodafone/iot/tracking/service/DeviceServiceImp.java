@@ -51,16 +51,49 @@ public class DeviceServiceImp implements DeviceService{
 	}
 
 	@Override
-	public List<Device> getpendingDevices() {
+	public List<Device> getPendingDevices() {
 		
 		try {
 			
-			return deviceRepository.getpendingDevices();
+			return deviceRepository.getPendingDevices();
 			
 		} catch (Exception e) {
-			System.out.println("can't get pending device");
+			System.out.println("can't get pending devices ");
 			return null;
 		}
+	}
+
+	@Override
+	public List<Device> getReadyForSaleDevices() {
+		
+		try {
+			
+			return deviceRepository.getReadyDevices();
+			
+		} catch (Exception e) {
+			System.out.println("can't get ready for sale devices ");
+			return null;
+		}
+	}
+
+	@Override
+	public void changeDeviceStatus(long deviceId, String status) {
+		
+		try {
+			Device device = deviceRepository.getOne(deviceId);
+			
+			device.getSimCard().setStatus(status);
+			
+			if(status.equals("active")) {
+				device.setStatus("ready");
+			}
+			
+			deviceRepository.save(device);
+			
+		} catch (Exception e) {
+			System.out.println("can't change device configuration status");
+		}
+		
 	}
 
 }

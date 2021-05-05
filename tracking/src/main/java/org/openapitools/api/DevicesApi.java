@@ -28,7 +28,7 @@ import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2021-05-05T23:50:48.228+02:00[Africa/Cairo]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2021-05-06T00:57:36.555+02:00[Africa/Cairo]")
 
 @Validated
 @Api(value = "devices", description = "the devices API")
@@ -163,11 +163,11 @@ public interface DevicesApi {
 
 
     /**
-     * PUT /devices/{id} : Accepts device data to update the device configration status.
+     * PUT /devices/{deviceId}/{status} : Accepts device data to update the device configration status.
      * Update device.
      *
-     * @param id pass an device id to update sim card status (required)
-     * @param device UpdateDevice request data. (optional)
+     * @param deviceId pass an device id to update sim card status (required)
+     * @param status new configruation status (required)
      * @return device updated (status code 201)
      *         or invalid input, object invalid (status code 400)
      */
@@ -175,15 +175,14 @@ public interface DevicesApi {
     @ApiResponses(value = { 
         @ApiResponse(code = 201, message = "device updated"),
         @ApiResponse(code = 400, message = "invalid input, object invalid") })
-    @RequestMapping(value = "/devices/{id}",
-        consumes = { "application/json" },
+    @RequestMapping(value = "/devices/{deviceId}/{status}",
         method = RequestMethod.PUT)
-    default ResponseEntity<Void> _updateDevice(@ApiParam(value = "pass an device id to update sim card status",required=true) @PathVariable("id") Long id,@ApiParam(value = "UpdateDevice request data."  )  @Valid @RequestBody(required = false) Device device) {
-        return updateDevice(id, device);
+    default ResponseEntity<Void> _updateDevice(@ApiParam(value = "pass an device id to update sim card status",required=true) @PathVariable("deviceId") Long deviceId,@ApiParam(value = "new configruation status",required=true) @PathVariable("status") String status) {
+        return updateDevice(deviceId, status);
     }
 
     // Override this method
-    default  ResponseEntity<Void> updateDevice(Long id, Device device) {
+    default  ResponseEntity<Void> updateDevice(Long deviceId, String status) {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 
     }

@@ -12,19 +12,16 @@ import javax.validation.constraints.*;
 import lombok.Builder;
 
 /**
- * Device
+ * InlineObject
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2021-05-06T00:57:36.555+02:00[Africa/Cairo]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2021-05-06T00:28:41.521+02:00[Africa/Cairo]")
 
 @Builder
-public class Device   {
+public class InlineObject   {
   @JsonProperty("status")
   private String status;
 
-  @JsonProperty("temperature")
-  private Float temperature = null;
-
-  public Device status(String status) {
+  public InlineObject status(String status) {
     this.status = status;
     return this;
   }
@@ -33,7 +30,7 @@ public class Device   {
    * Get status
    * @return status
   */
-  @ApiModelProperty(example = "ready", value = "")
+  @ApiModelProperty(value = "")
 
 
   public String getStatus() {
@@ -42,27 +39,6 @@ public class Device   {
 
   public void setStatus(String status) {
     this.status = status;
-  }
-
-  public Device temperature(Float temperature) {
-    this.temperature = temperature;
-    return this;
-  }
-
-  /**
-   * Get temperature
-   * @return temperature
-  */
-  @ApiModelProperty(example = "-25.0", required = true, value = "")
-  @NotNull
-
-
-  public Float getTemperature() {
-    return temperature;
-  }
-
-  public void setTemperature(Float temperature) {
-    this.temperature = temperature;
   }
 
 
@@ -74,23 +50,21 @@ public class Device   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    Device device = (Device) o;
-    return Objects.equals(this.status, device.status) &&
-        Objects.equals(this.temperature, device.temperature);
+    InlineObject inlineObject = (InlineObject) o;
+    return Objects.equals(this.status, inlineObject.status);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(status, temperature);
+    return Objects.hash(status);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class Device {\n");
+    sb.append("class InlineObject {\n");
     
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
-    sb.append("    temperature: ").append(toIndentedString(temperature)).append("\n");
     sb.append("}");
     return sb.toString();
   }

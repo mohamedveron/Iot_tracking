@@ -15,7 +15,7 @@ import lombok.Builder;
 /**
  * DeviceDetailsAllOf
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2021-05-05T23:50:48.228+02:00[Africa/Cairo]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2021-05-06T00:57:36.555+02:00[Africa/Cairo]")
 
 @Builder
 public class DeviceDetailsAllOf   {

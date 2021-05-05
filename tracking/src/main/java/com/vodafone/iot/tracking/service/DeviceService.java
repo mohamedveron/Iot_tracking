@@ -9,5 +9,7 @@ public interface DeviceService {
 	
 	public long createDevice(Device d);
 	public void addSIMCardToDevice(long deviceId, SIMCard card);
-	public List<Device>	getpendingDevices();
+	public List<Device>	getPendingDevices();
+	public List<Device>	getReadyForSaleDevices();
+	public void changeDeviceStatus(long deviceId, String status);
 }
