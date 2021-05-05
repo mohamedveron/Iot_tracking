@@ -15,85 +15,102 @@ paths:
   /devices/:
     post:   
       summary: >-
-        Accepts pilot data to create account and register.
-      operationId: createPilot
-      description: Register new pilot.
+        Accepts device data to create device.
+      operationId: createDevice
+      description: Create new device.
       requestBody:
-        description: RegisterPilotPost request data.
+        description: createDevice request data.
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/Device'
       responses:
         '201':
-          description: pilot created
+          description: device created
         '400':
           description: 'invalid input, object invalid'
         '409':
           description: an existing item already exists
-          
+  
+  /devices/{id}:
+    post:   
+      summary: >-
+        Accepts sim card data to add it to device.
+      operationId: configureDevice
+      description: Configure device.
+      parameters:
+      - name: id
+        in: path
+        description: pass an device id to add sim card
+        required: true
+        schema:
+          type: integer
+          format: int64 
+      requestBody:
+        description: configureDevice request data.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Device'
+      responses:
+        '200':
+          description: device Configured
+        '400':
+          description: 'invalid input, object invalid'
+               
     put:   
       summary: >-
-        Accepts pilot data to update the account and compelete all details.
-      operationId: UpdatePilot
-      description: Update pilot.
+        Accepts device data to update the device configration status.
+      operationId: UpdateDevice
+      description: Update device.
       requestBody:
-        description: UpdatePilotPost request data.
+        description: UpdateDevice request data.
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/Device'
       responses:
         '201':
-          description: pilot updated
+          description: device updated
         '400':
-          description: 'invalid input, object invalid'
-        '409':
-          description: an existing item already exists      
+          description: 'invalid input, object invalid'    
    
                  
   /devices/pending:        
     get:
       summary: >-
-        Accepts pilot .
-      operationId: getPilot
-      description: Get pilot .
-          
+        get device waiting for activation .
+      operationId: getPendingDevices
+      description: Get Pending Devices .
       responses:
         '200':
-          description: item returned
+          description: devices returned
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DeviceDetails'
-          
+                type: array
+                items:
+                  $ref: '#/components/schemas/DeviceDetails'    
         '400':
           description: 'invalid input, object invalid'
   
   /devices/ready:        
     get:
       summary: >-
-        Accepts pilot id.
-      operationId: getPilotById
-      description: Get specific pilot .
-      parameters:
-      - name: id
-        in: path
-        description: pass an pilot id to get his data
-        required: true
-        schema:
-          type: integer
-          format: int64    
+        get device ready for sale .
+      operationId: getReadyDevices
+      description: Get Ready Devices .
       responses:
         '200':
-          description: item returned
+          description: devices returned
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Device'
-          
+                type: array
+                items:
+                  $ref: '#/components/schemas/DeviceDetails'    
         '400':
-          description: 'invalid input, object invalid'                               
+          description: 'invalid input, object invalid'                              
       
 components:    
   schemas:
