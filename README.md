@@ -8,7 +8,7 @@ This service is developed using springboot framework and oapi-codegen to generat
 
 ## Setup of the component
 
-Must have jdk installed version >= 8 and also maven
+Must have jdk installed version >= 8 and installed maven
 
 make file consists of 2 steps: generate, run
 you can run all of them 
