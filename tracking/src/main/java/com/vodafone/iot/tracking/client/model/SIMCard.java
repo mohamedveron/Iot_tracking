@@ -14,13 +14,10 @@ import lombok.Builder;
 /**
  * SIMCard
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2021-05-05T18:10:36.942+02:00[Africa/Cairo]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2021-05-05T21:09:22.166+02:00[Africa/Cairo]")
 
 @Builder
 public class SIMCard   {
-  @JsonProperty("Id")
-  private Long id;
-
   @JsonProperty("operatorCode")
   private String operatorCode;
 
@@ -29,27 +26,6 @@ public class SIMCard   {
 
   @JsonProperty("country")
   private String country;
-
-  public SIMCard id(Long id) {
-    this.id = id;
-    return this;
-  }
-
-  /**
-   * Get id
-   * @return id
-  */
-  @ApiModelProperty(required = true, value = "")
-  @NotNull
-
-
-  public Long getId() {
-    return id;
-  }
-
-  public void setId(Long id) {
-    this.id = id;
-  }
 
   public SIMCard operatorCode(String operatorCode) {
     this.operatorCode = operatorCode;
@@ -60,7 +36,8 @@ public class SIMCard   {
    * Get operatorCode
    * @return operatorCode
   */
-  @ApiModelProperty(example = "true", value = "")
+  @ApiModelProperty(example = "true", required = true, value = "")
+  @NotNull
 
 
   public String getOperatorCode() {
@@ -80,7 +57,8 @@ public class SIMCard   {
    * Get status
    * @return status
   */
-  @ApiModelProperty(example = "active", value = "")
+  @ApiModelProperty(example = "active", required = true, value = "")
+  @NotNull
 
 
   public String getStatus() {
@@ -121,15 +99,14 @@ public class SIMCard   {
       return false;
     }
     SIMCard siMCard = (SIMCard) o;
-    return Objects.equals(this.id, siMCard.id) &&
-        Objects.equals(this.operatorCode, siMCard.operatorCode) &&
+    return Objects.equals(this.operatorCode, siMCard.operatorCode) &&
         Objects.equals(this.status, siMCard.status) &&
         Objects.equals(this.country, siMCard.country);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, operatorCode, status, country);
+    return Objects.hash(operatorCode, status, country);
   }
 
   @Override
@@ -137,7 +114,6 @@ public class SIMCard   {
     StringBuilder sb = new StringBuilder();
     sb.append("class SIMCard {\n");
     
-    sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    operatorCode: ").append(toIndentedString(operatorCode)).append("\n");
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("    country: ").append(toIndentedString(country)).append("\n");

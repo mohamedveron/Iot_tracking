@@ -18,6 +18,7 @@ public class Device {
 	
 	@Id
 	@GeneratedValue
+	@Getter
 	private Long id;
 	@Getter
 	@Setter

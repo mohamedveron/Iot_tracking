@@ -26,7 +26,12 @@ paths:
               $ref: '#/components/schemas/Device'
       responses:
         '201':
-          description: device created
+          description: device created with this id
+          content:
+            application/json:
+              schema:
+                type: integer
+                format: int64 
         '400':
           description: 'invalid input, object invalid'
         '409':
@@ -152,12 +157,10 @@ components:
     
     SIMCard: 
       required:
-      - Id
+      - operatorCode
+      - status
       type: object
       properties:
-        Id:
-          type: integer
-          format: int64
         operatorCode:
           type: string
           example: true

@@ -28,7 +28,7 @@ import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2021-05-05T18:10:36.942+02:00[Africa/Cairo]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2021-05-05T21:09:22.166+02:00[Africa/Cairo]")
 
 @Validated
 @Api(value = "devices", description = "the devices API")
@@ -70,24 +70,25 @@ public interface DevicesApi {
      * Create new device.
      *
      * @param device createDevice request data. (optional)
-     * @return device created (status code 201)
+     * @return device created with this id (status code 201)
      *         or invalid input, object invalid (status code 400)
      *         or an existing item already exists (status code 409)
      */
-    @ApiOperation(value = "Accepts device data to create device.", nickname = "createDevice", notes = "Create new device.", tags={  })
+    @ApiOperation(value = "Accepts device data to create device.", nickname = "createDevice", notes = "Create new device.", response = Long.class, tags={  })
     @ApiResponses(value = { 
-        @ApiResponse(code = 201, message = "device created"),
+        @ApiResponse(code = 201, message = "device created with this id", response = Long.class),
         @ApiResponse(code = 400, message = "invalid input, object invalid"),
         @ApiResponse(code = 409, message = "an existing item already exists") })
     @RequestMapping(value = "/devices/",
+        produces = { "application/json" }, 
         consumes = { "application/json" },
         method = RequestMethod.POST)
-    default ResponseEntity<Void> _createDevice(@ApiParam(value = "createDevice request data."  )  @Valid @RequestBody(required = false) Device device) {
+    default ResponseEntity<Long> _createDevice(@ApiParam(value = "createDevice request data."  )  @Valid @RequestBody(required = false) Device device) {
         return createDevice(device);
     }
 
     // Override this method
-    default  ResponseEntity<Void> createDevice(Device device) {
+    default  ResponseEntity<Long> createDevice(Device device) {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 
     }

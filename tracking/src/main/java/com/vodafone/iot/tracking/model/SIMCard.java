@@ -29,9 +29,8 @@ public class SIMCard {
 	public SIMCard() {
 	}
 	
-	public SIMCard(Long id, String status, String code, String country) {
+	public SIMCard(String status, String code, String country) {
 		super();
-		this.id = id;
 		this.status = status;
 		this.code = code;
 		this.country = country;

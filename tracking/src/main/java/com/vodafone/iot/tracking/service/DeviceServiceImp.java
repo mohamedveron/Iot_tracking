@@ -6,20 +6,27 @@ import org.springframework.stereotype.Service;
 import com.vodafone.iot.tracking.model.Device;
 import com.vodafone.iot.tracking.model.SIMCard;
 import com.vodafone.iot.tracking.persistence.DeviceRepository;
+import com.vodafone.iot.tracking.persistence.SIMCardRepository;
 
 @Service
 public class DeviceServiceImp implements DeviceService{
 	
 	@Autowired
 	private DeviceRepository deviceRepository;
+	
+	@Autowired
+	private SIMCardRepository SimCardRepository;
 
 	@Override
-	public void createDevice(Device d) {
+	public long createDevice(Device d) {
 		
+		Device device = d;
 		try {
-			deviceRepository.save(d);
+			 device = deviceRepository.save(d);
+			 return device.getId();
 		} catch (Exception e) {
 			System.out.println("can't create device");
+			return -1;
 		}
 		
 	}
@@ -27,10 +34,17 @@ public class DeviceServiceImp implements DeviceService{
 	@Override
 	public void addSIMCardToDevice(long deviceId, SIMCard card) {
 		
-		Device device = deviceRepository.getOne(deviceId);
 		
-		
-		device.setSimCard(card);
+		try {
+			Device device = deviceRepository.getOne(deviceId);
+			SIMCard simCard = SimCardRepository.save(card);
+			
+			device.setSimCard(simCard);
+			deviceRepository.save(device);
+			
+		} catch (Exception e) {
+			System.out.println("can't add sim card to device");
+		}
 		
 	}
 

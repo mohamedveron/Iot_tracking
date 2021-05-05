@@ -17,23 +17,23 @@ public class DeviceController implements DevicesApi{
 	private DeviceService deviceService;
 	
 	@Override
-	public  ResponseEntity<Void> createDevice(Device device) {
+	public  ResponseEntity<Long> createDevice(Device device) {
 		
 		com.vodafone.iot.tracking.model.Device newDevice = new com.vodafone.iot.tracking.model.Device(device.getStatus(), device.getTemperature(), null);
 		
 		try {
-			deviceService.createDevice(newDevice);
-			return new ResponseEntity<>(HttpStatus.OK);
+			long deviceId = deviceService.createDevice(newDevice);
+			return new ResponseEntity<Long>(deviceId, HttpStatus.OK);
 		} catch (Exception e) {
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<Long>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
     }
 	
 	@Override
 	 // Override this method
-    public  ResponseEntity<Void> configureDevice(Long id, SIMCard siMCard) {
+    public  ResponseEntity<Void> configureDevice(Long id, SIMCard simCard) {
         
-		com.vodafone.iot.tracking.model.SIMCard card = new com.vodafone.iot.tracking.model.SIMCard();
+		com.vodafone.iot.tracking.model.SIMCard card = new com.vodafone.iot.tracking.model.SIMCard(simCard.getStatus(), simCard.getOperatorCode(), simCard.getCountry());
 		
 		try {
 			deviceService.addSIMCardToDevice(id, card);
