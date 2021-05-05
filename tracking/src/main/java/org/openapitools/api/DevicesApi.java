@@ -7,6 +7,7 @@ package org.openapitools.api;
 
 import com.vodafone.iot.tracking.client.model.Device;
 import com.vodafone.iot.tracking.client.model.DeviceDetails;
+import com.vodafone.iot.tracking.client.model.SIMCard;
 import io.swagger.annotations.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -27,7 +28,7 @@ import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2021-05-05T15:59:04.747+02:00[Africa/Cairo]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2021-05-05T18:10:36.942+02:00[Africa/Cairo]")
 
 @Validated
 @Api(value = "devices", description = "the devices API")
@@ -38,53 +39,80 @@ public interface DevicesApi {
     }
 
     /**
-     * POST /devices/ : Accepts pilot data to create account and register.
-     * Register new pilot.
+     * POST /devices/{id} : Accepts sim card data to add it to device.
+     * Configure device.
      *
-     * @param device RegisterPilotPost request data. (optional)
-     * @return pilot created (status code 201)
+     * @param id pass an device id to add sim card (required)
+     * @param siMCard configureDevice request data. (optional)
+     * @return device Configured (status code 200)
      *         or invalid input, object invalid (status code 400)
-     *         or an existing item already exists (status code 409)
      */
-    @ApiOperation(value = "Accepts pilot data to create account and register.", nickname = "createPilot", notes = "Register new pilot.", tags={  })
+    @ApiOperation(value = "Accepts sim card data to add it to device.", nickname = "configureDevice", notes = "Configure device.", tags={  })
     @ApiResponses(value = { 
-        @ApiResponse(code = 201, message = "pilot created"),
-        @ApiResponse(code = 400, message = "invalid input, object invalid"),
-        @ApiResponse(code = 409, message = "an existing item already exists") })
-    @RequestMapping(value = "/devices/",
+        @ApiResponse(code = 200, message = "device Configured"),
+        @ApiResponse(code = 400, message = "invalid input, object invalid") })
+    @RequestMapping(value = "/devices/{id}",
         consumes = { "application/json" },
         method = RequestMethod.POST)
-    default ResponseEntity<Void> _createPilot(@ApiParam(value = "RegisterPilotPost request data."  )  @Valid @RequestBody(required = false) Device device) {
-        return createPilot(device);
+    default ResponseEntity<Void> _configureDevice(@ApiParam(value = "pass an device id to add sim card",required=true) @PathVariable("id") Long id,@ApiParam(value = "configureDevice request data."  )  @Valid @RequestBody(required = false) SIMCard siMCard) {
+        return configureDevice(id, siMCard);
     }
 
     // Override this method
-    default  ResponseEntity<Void> createPilot(Device device) {
+    default  ResponseEntity<Void> configureDevice(Long id, SIMCard siMCard) {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 
     }
 
 
     /**
-     * GET /devices/pending : Accepts pilot .
-     * Get pilot .
+     * POST /devices/ : Accepts device data to create device.
+     * Create new device.
      *
-     * @return item returned (status code 200)
+     * @param device createDevice request data. (optional)
+     * @return device created (status code 201)
+     *         or invalid input, object invalid (status code 400)
+     *         or an existing item already exists (status code 409)
+     */
+    @ApiOperation(value = "Accepts device data to create device.", nickname = "createDevice", notes = "Create new device.", tags={  })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 201, message = "device created"),
+        @ApiResponse(code = 400, message = "invalid input, object invalid"),
+        @ApiResponse(code = 409, message = "an existing item already exists") })
+    @RequestMapping(value = "/devices/",
+        consumes = { "application/json" },
+        method = RequestMethod.POST)
+    default ResponseEntity<Void> _createDevice(@ApiParam(value = "createDevice request data."  )  @Valid @RequestBody(required = false) Device device) {
+        return createDevice(device);
+    }
+
+    // Override this method
+    default  ResponseEntity<Void> createDevice(Device device) {
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+    }
+
+
+    /**
+     * GET /devices/pending : get device waiting for activation .
+     * Get Pending Devices .
+     *
+     * @return devices returned (status code 200)
      *         or invalid input, object invalid (status code 400)
      */
-    @ApiOperation(value = "Accepts pilot .", nickname = "getPilot", notes = "Get pilot .", response = DeviceDetails.class, tags={  })
+    @ApiOperation(value = "get device waiting for activation .", nickname = "getPendingDevices", notes = "Get Pending Devices .", response = DeviceDetails.class, responseContainer = "List", tags={  })
     @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "item returned", response = DeviceDetails.class),
+        @ApiResponse(code = 200, message = "devices returned", response = DeviceDetails.class, responseContainer = "List"),
         @ApiResponse(code = 400, message = "invalid input, object invalid") })
     @RequestMapping(value = "/devices/pending",
         produces = { "application/json" }, 
         method = RequestMethod.GET)
-    default ResponseEntity<DeviceDetails> _getPilot() {
-        return getPilot();
+    default ResponseEntity<List<DeviceDetails>> _getPendingDevices() {
+        return getPendingDevices();
     }
 
     // Override this method
-    default  ResponseEntity<DeviceDetails> getPilot() {
+    default  ResponseEntity<List<DeviceDetails>> getPendingDevices() {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
@@ -100,30 +128,29 @@ public interface DevicesApi {
 
 
     /**
-     * GET /devices/ready : Accepts pilot id.
-     * Get specific pilot .
+     * GET /devices/ready : get device ready for sale .
+     * Get Ready Devices .
      *
-     * @param id pass an pilot id to get his data (required)
-     * @return item returned (status code 200)
+     * @return devices returned (status code 200)
      *         or invalid input, object invalid (status code 400)
      */
-    @ApiOperation(value = "Accepts pilot id.", nickname = "getPilotById", notes = "Get specific pilot .", response = Device.class, tags={  })
+    @ApiOperation(value = "get device ready for sale .", nickname = "getReadyDevices", notes = "Get Ready Devices .", response = DeviceDetails.class, responseContainer = "List", tags={  })
     @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "item returned", response = Device.class),
+        @ApiResponse(code = 200, message = "devices returned", response = DeviceDetails.class, responseContainer = "List"),
         @ApiResponse(code = 400, message = "invalid input, object invalid") })
     @RequestMapping(value = "/devices/ready",
         produces = { "application/json" }, 
         method = RequestMethod.GET)
-    default ResponseEntity<Device> _getPilotById(@ApiParam(value = "pass an pilot id to get his data",required=true) @PathVariable("id") Long id) {
-        return getPilotById(id);
+    default ResponseEntity<List<DeviceDetails>> _getReadyDevices() {
+        return getReadyDevices();
     }
 
     // Override this method
-    default  ResponseEntity<Device> getPilotById(Long id) {
+    default  ResponseEntity<List<DeviceDetails>> getReadyDevices() {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"temperature\" : -25.0, \"status\" : \"ready\" }";
+                    String exampleString = "null";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -135,28 +162,27 @@ public interface DevicesApi {
 
 
     /**
-     * PUT /devices/ : Accepts pilot data to update the account and compelete all details.
-     * Update pilot.
+     * PUT /devices/{id} : Accepts device data to update the device configration status.
+     * Update device.
      *
-     * @param device UpdatePilotPost request data. (optional)
-     * @return pilot updated (status code 201)
+     * @param id pass an device id to update sim card status (required)
+     * @param device UpdateDevice request data. (optional)
+     * @return device updated (status code 201)
      *         or invalid input, object invalid (status code 400)
-     *         or an existing item already exists (status code 409)
      */
-    @ApiOperation(value = "Accepts pilot data to update the account and compelete all details.", nickname = "updatePilot", notes = "Update pilot.", tags={  })
+    @ApiOperation(value = "Accepts device data to update the device configration status.", nickname = "updateDevice", notes = "Update device.", tags={  })
     @ApiResponses(value = { 
-        @ApiResponse(code = 201, message = "pilot updated"),
-        @ApiResponse(code = 400, message = "invalid input, object invalid"),
-        @ApiResponse(code = 409, message = "an existing item already exists") })
-    @RequestMapping(value = "/devices/",
+        @ApiResponse(code = 201, message = "device updated"),
+        @ApiResponse(code = 400, message = "invalid input, object invalid") })
+    @RequestMapping(value = "/devices/{id}",
         consumes = { "application/json" },
         method = RequestMethod.PUT)
-    default ResponseEntity<Void> _updatePilot(@ApiParam(value = "UpdatePilotPost request data."  )  @Valid @RequestBody(required = false) Device device) {
-        return updatePilot(device);
+    default ResponseEntity<Void> _updateDevice(@ApiParam(value = "pass an device id to update sim card status",required=true) @PathVariable("id") Long id,@ApiParam(value = "UpdateDevice request data."  )  @Valid @RequestBody(required = false) Device device) {
+        return updateDevice(id, device);
     }
 
     // Override this method
-    default  ResponseEntity<Void> updatePilot(Device device) {
+    default  ResponseEntity<Void> updateDevice(Long id, Device device) {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 
     }

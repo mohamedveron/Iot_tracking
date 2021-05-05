@@ -14,7 +14,7 @@ import lombok.Builder;
 /**
  * SIMCard
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2021-05-05T15:59:04.747+02:00[Africa/Cairo]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2021-05-05T18:10:36.942+02:00[Africa/Cairo]")
 
 @Builder
 public class SIMCard   {

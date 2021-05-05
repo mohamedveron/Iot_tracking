@@ -51,7 +51,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Device'
+              $ref: '#/components/schemas/SIMCard'
       responses:
         '200':
           description: device Configured
@@ -63,6 +63,14 @@ paths:
         Accepts device data to update the device configration status.
       operationId: UpdateDevice
       description: Update device.
+      parameters:
+       - name: id
+         in: path
+         description: pass an device id to update sim card status
+         required: true
+         schema:
+           type: integer
+           format: int64 
       requestBody:
         description: UpdateDevice request data.
         content:
@@ -139,7 +147,7 @@ components:
           type: string
           example: ready
         temperature:
-          type: number
+          type: float
           example: -25.
     
     SIMCard: 

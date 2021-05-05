@@ -8,7 +8,6 @@ import com.vodafone.iot.tracking.client.model.DeviceDetailsAllOf;
 import com.vodafone.iot.tracking.client.model.SIMCard;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import java.math.BigDecimal;
 import org.openapitools.jackson.nullable.JsonNullable;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
@@ -18,7 +17,7 @@ import lombok.Builder;
 /**
  * DeviceDetails
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2021-05-05T15:59:04.747+02:00[Africa/Cairo]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2021-05-05T18:10:36.942+02:00[Africa/Cairo]")
 
 @Builder
 public class DeviceDetails   {
@@ -26,7 +25,7 @@ public class DeviceDetails   {
   private String status;
 
   @JsonProperty("temperature")
-  private BigDecimal temperature;
+  private Float temperature = null;
 
   @JsonProperty("id")
   private Long id;
@@ -54,7 +53,7 @@ public class DeviceDetails   {
     this.status = status;
   }
 
-  public DeviceDetails temperature(BigDecimal temperature) {
+  public DeviceDetails temperature(Float temperature) {
     this.temperature = temperature;
     return this;
   }
@@ -66,13 +65,12 @@ public class DeviceDetails   {
   @ApiModelProperty(example = "-25.0", required = true, value = "")
   @NotNull
 
-  @Valid
 
-  public BigDecimal getTemperature() {
+  public Float getTemperature() {
     return temperature;
   }
 
-  public void setTemperature(BigDecimal temperature) {
+  public void setTemperature(Float temperature) {
     this.temperature = temperature;
   }
 

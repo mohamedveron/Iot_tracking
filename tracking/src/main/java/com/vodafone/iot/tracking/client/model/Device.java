@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import java.math.BigDecimal;
 import org.openapitools.jackson.nullable.JsonNullable;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
@@ -15,7 +14,7 @@ import lombok.Builder;
 /**
  * Device
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2021-05-05T15:59:04.747+02:00[Africa/Cairo]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2021-05-05T18:10:36.942+02:00[Africa/Cairo]")
 
 @Builder
 public class Device   {
@@ -23,7 +22,7 @@ public class Device   {
   private String status;
 
   @JsonProperty("temperature")
-  private BigDecimal temperature;
+  private Float temperature = null;
 
   public Device status(String status) {
     this.status = status;
@@ -45,7 +44,7 @@ public class Device   {
     this.status = status;
   }
 
-  public Device temperature(BigDecimal temperature) {
+  public Device temperature(Float temperature) {
     this.temperature = temperature;
     return this;
   }
@@ -57,13 +56,12 @@ public class Device   {
   @ApiModelProperty(example = "-25.0", required = true, value = "")
   @NotNull
 
-  @Valid
 
-  public BigDecimal getTemperature() {
+  public Float getTemperature() {
     return temperature;
   }
 
-  public void setTemperature(BigDecimal temperature) {
+  public void setTemperature(Float temperature) {
     this.temperature = temperature;
   }
 

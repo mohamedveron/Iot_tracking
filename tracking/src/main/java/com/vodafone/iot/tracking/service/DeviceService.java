@@ -6,5 +6,5 @@ import com.vodafone.iot.tracking.model.SIMCard;
 public interface DeviceService {
 	
 	public void createDevice(Device d);
-	public void addSIMCardToDevice(SIMCard card);
+	public void addSIMCardToDevice(long deviceId, SIMCard card);
 }

@@ -29,14 +29,15 @@ public class Device {
     @OneToOne
     @JoinColumn(name = "simcard_id", nullable=true)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @Getter
+	@Setter
     private SIMCard simCard;
 
 	public Device() {
 	}
 
-	public Device(Long id, String status, float temperature, SIMCard simCard) {
+	public Device( String status, float temperature, SIMCard simCard) {
 		super();
-		this.id = id;
 		this.status = status;
 		this.temperature = temperature;
 		this.simCard = simCard;
