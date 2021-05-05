@@ -1,8 +1,9 @@
-package com.leadville.lambda.client.model;
+package com.vodafone.iot.tracking.client.model;
 
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.vodafone.iot.tracking.client.model.SIMCard;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.openapitools.jackson.nullable.JsonNullable;
@@ -14,18 +15,15 @@ import lombok.Builder;
 /**
  * DeviceDetailsAllOf
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2021-05-04T19:43:38.242+02:00[Africa/Cairo]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2021-05-05T15:59:04.747+02:00[Africa/Cairo]")
 
 @Builder
 public class DeviceDetailsAllOf   {
   @JsonProperty("id")
   private Long id;
 
-  @JsonProperty("imageUrl")
-  private String imageUrl;
-
-  @JsonProperty("gender")
-  private String gender;
+  @JsonProperty("SIMCard")
+  private SIMCard siMCard;
 
   public DeviceDetailsAllOf id(Long id) {
     this.id = id;
@@ -47,44 +45,25 @@ public class DeviceDetailsAllOf   {
     this.id = id;
   }
 
-  public DeviceDetailsAllOf imageUrl(String imageUrl) {
-    this.imageUrl = imageUrl;
+  public DeviceDetailsAllOf siMCard(SIMCard siMCard) {
+    this.siMCard = siMCard;
     return this;
   }
 
   /**
-   * Get imageUrl
-   * @return imageUrl
+   * Get siMCard
+   * @return siMCard
   */
   @ApiModelProperty(value = "")
 
+  @Valid
 
-  public String getImageUrl() {
-    return imageUrl;
+  public SIMCard getSiMCard() {
+    return siMCard;
   }
 
-  public void setImageUrl(String imageUrl) {
-    this.imageUrl = imageUrl;
-  }
-
-  public DeviceDetailsAllOf gender(String gender) {
-    this.gender = gender;
-    return this;
-  }
-
-  /**
-   * Get gender
-   * @return gender
-  */
-  @ApiModelProperty(value = "")
-
-
-  public String getGender() {
-    return gender;
-  }
-
-  public void setGender(String gender) {
-    this.gender = gender;
+  public void setSiMCard(SIMCard siMCard) {
+    this.siMCard = siMCard;
   }
 
 
@@ -98,13 +77,12 @@ public class DeviceDetailsAllOf   {
     }
     DeviceDetailsAllOf deviceDetailsAllOf = (DeviceDetailsAllOf) o;
     return Objects.equals(this.id, deviceDetailsAllOf.id) &&
-        Objects.equals(this.imageUrl, deviceDetailsAllOf.imageUrl) &&
-        Objects.equals(this.gender, deviceDetailsAllOf.gender);
+        Objects.equals(this.siMCard, deviceDetailsAllOf.siMCard);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, imageUrl, gender);
+    return Objects.hash(id, siMCard);
   }
 
   @Override
@@ -113,8 +91,7 @@ public class DeviceDetailsAllOf   {
     sb.append("class DeviceDetailsAllOf {\n");
     
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
-    sb.append("    imageUrl: ").append(toIndentedString(imageUrl)).append("\n");
-    sb.append("    gender: ").append(toIndentedString(gender)).append("\n");
+    sb.append("    siMCard: ").append(toIndentedString(siMCard)).append("\n");
     sb.append("}");
     return sb.toString();
   }

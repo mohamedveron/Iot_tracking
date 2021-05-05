@@ -5,8 +5,8 @@
  */
 package org.openapitools.api;
 
-import com.leadville.lambda.client.model.Device;
-import com.leadville.lambda.client.model.DeviceDetails;
+import com.vodafone.iot.tracking.client.model.Device;
+import com.vodafone.iot.tracking.client.model.DeviceDetails;
 import io.swagger.annotations.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -27,7 +27,7 @@ import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2021-05-04T19:43:38.242+02:00[Africa/Cairo]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2021-05-05T15:59:04.747+02:00[Africa/Cairo]")
 
 @Validated
 @Api(value = "devices", description = "the devices API")
@@ -100,7 +100,7 @@ public interface DevicesApi {
 
 
     /**
-     * GET /devices/{id} : Accepts pilot id.
+     * GET /devices/ready : Accepts pilot id.
      * Get specific pilot .
      *
      * @param id pass an pilot id to get his data (required)
@@ -111,7 +111,7 @@ public interface DevicesApi {
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "item returned", response = Device.class),
         @ApiResponse(code = 400, message = "invalid input, object invalid") })
-    @RequestMapping(value = "/devices/{id}",
+    @RequestMapping(value = "/devices/ready",
         produces = { "application/json" }, 
         method = RequestMethod.GET)
     default ResponseEntity<Device> _getPilotById(@ApiParam(value = "pass an pilot id to get his data",required=true) @PathVariable("id") Long id) {
@@ -123,7 +123,7 @@ public interface DevicesApi {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"frequentFlyer\" : true, \"flyingDetails\" : \"I've been flying for 5 years\", \"pilotPostId\" : 0, \"about\" : \"about me\" }";
+                    String exampleString = "{ \"temperature\" : -25.0, \"status\" : \"ready\" }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }

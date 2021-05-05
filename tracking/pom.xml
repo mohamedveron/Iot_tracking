@@ -125,7 +125,7 @@
 	            	<output>${project.basedir}</output>
 	                <inputSpec>resources/openapi.yaml</inputSpec>
 	                <generatorName>spring</generatorName>
-	                <modelPackage>com.leadville.lambda.client.model</modelPackage>
+	                <modelPackage>com.vodafone.iot.tracking.client.model</modelPackage>
 	                <generateApis>true</generateApis>
 	                <generateSupportingFiles>false</generateSupportingFiles>
 	                <generateModelTests>false</generateModelTests>
