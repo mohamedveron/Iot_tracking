@@ -1,5 +1,7 @@
 package com.vodafone.iot.tracking.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -46,6 +48,19 @@ public class DeviceServiceImp implements DeviceService{
 			System.out.println("can't add sim card to device");
 		}
 		
+	}
+
+	@Override
+	public List<Device> getpendingDevices() {
+		
+		try {
+			
+			return deviceRepository.getpendingDevices();
+			
+		} catch (Exception e) {
+			System.out.println("can't get pending device");
+			return null;
+		}
 	}
 
 }

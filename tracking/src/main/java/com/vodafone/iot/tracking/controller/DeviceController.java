@@ -1,5 +1,8 @@
 package com.vodafone.iot.tracking.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.openapitools.api.DevicesApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -7,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.vodafone.iot.tracking.client.model.Device;
+import com.vodafone.iot.tracking.client.model.DeviceDetails;
 import com.vodafone.iot.tracking.client.model.SIMCard;
 import com.vodafone.iot.tracking.service.DeviceService;
 
@@ -42,5 +46,36 @@ public class DeviceController implements DevicesApi{
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 
+    }
+	
+	@Override
+	public  ResponseEntity<List<DeviceDetails>> getPendingDevices() {
+		
+		List<DeviceDetails> response = new ArrayList<DeviceDetails>();
+		
+		try {
+			List<com.vodafone.iot.tracking.model.Device> devices = deviceService.getpendingDevices();
+			
+			for(com.vodafone.iot.tracking.model.Device d : devices) {
+				
+				SIMCard card = SIMCard.builder()
+						.operatorCode(d.getSimCard().getCode())
+						.status(d.getSimCard().getStatus())
+						.country(d.getSimCard().getCountry())
+						.build();
+				
+				DeviceDetails device = DeviceDetails.builder()
+						.id(d.getId())
+						.temperature(d.getTemperature())
+						.status(d.getStatus())
+						.siMCard(card)
+						.build();
+				
+				response.add(device);
+			}
+			return new ResponseEntity<List<DeviceDetails>>(response, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<List<DeviceDetails>>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
     }
 }
