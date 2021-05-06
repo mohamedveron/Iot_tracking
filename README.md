@@ -18,6 +18,7 @@ make file consists of 2 steps: generate, run
 you can run all of them 
 
 ```bash
+cd tracking
 make all
 ```
 This app use an relational db postgres and it is an AWS RDS postgres instance
@@ -26,5 +27,6 @@ This app use an relational db postgres and it is an AWS RDS postgres instance
 # Start the http server on port 8080:
 
 ```bash
+cd tracking
 make run
 ```
